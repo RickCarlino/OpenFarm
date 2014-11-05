@@ -36,7 +36,16 @@ directive = ($http) ->
           .responseXML
           .getElementsByTagName("Location")[0]
           .innerHTML
-    currentUpload.scope[currentUpload.attr.uploader] = url
+    # WARNING: THIS IS AWFUL! ==================================================
+    # This script performans an eval on the current scope so that you can assign
+    # the value using complex routing keys such as "guide.stages[1].url". I
+    # couldn't think of a better, eval free way of doing this. If you know an
+    # alternative, raise an issue!
+    # ==========================================================================
+    scope_var = currentUpload.attr.uploader
+    command   = "currentUpload.scope.#{scope_var} = '#{url}'"
+    result    = eval command
+    debugger
     currentUpload.scope.$digest()
     window.currentUpload = undefined
 
