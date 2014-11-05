@@ -94,7 +94,7 @@
         <%= t('.impressions', count: @guide.impressions.count) %>
         </p>
       </accordion-group>
-      <accordion-group 
+      <accordion-group
         is-open="req.isopen"
         ng-init="req.isopen = true"
         class="accordion-navigation requirements">
@@ -204,8 +204,13 @@
                     ng-change="setStatus(s)"
                     rows="6">
                   </textarea>
-                  <p class="markdown-help-text">          <%= t('.using_markdown_is_okay_html') %>
-
+                  <p class="markdown-help-text">
+                    <%= t('.using_markdown_is_okay_html') %>
+                  </p>
+                  <p class="markdown-help-text">
+                    <%= t('.add_an_optional_stage_image') %>
+                  </p>
+                  <input type="file">
                 </div>
               </div>
             </div>

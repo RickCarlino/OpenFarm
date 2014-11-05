@@ -68,7 +68,7 @@ en:
             units_preference: "What units do you prefer"
             email_sign_up: "Do you want to receive the OpenFarm email newsletter?"
             add_garden: "Next: Add Garden"
-    crops:  
+    crops:
         name: "Name"
         binomial_name: "Binomial Name"
         description: "Description"
@@ -92,7 +92,7 @@ en:
             using_markdown_is_okay_html: "Using <a href='http://daringfireball.net/projects/markdown/syntax'>markdown</a> is okay!"
             more_details: "Give other OpenFarm users a bit more details about how to grow your plant."
             statistics: "Statistics"
-            impressions: 
+            impressions:
                 zero: "Your guide has had no views yet"
                 one: "Your guide has had one view!"
                 other: "Your guide has had %{count} views"
@@ -128,12 +128,13 @@ en:
             done_add_extras: "Done: Add Extras"
             call_your_guide_something: "Call your guide something"
             back: "Back"
+            add_an_optional_stage_image: "Optionally, you may add one or more stage images:"
         show:
             guide_by: "Guide by"
             statistics:
                 title: "Statistics"
                 once_we_know_more: "Once we know a bit more about this guide, you'll see some interesting statistics here."
-            requirements: 
+            requirements:
                 title: "Requirements"
                 the_small_details: "Requirements are the small details that make sure this crop grow successfully."
                 no_requirements_yet: "The person who made this guide hasn't added any requirements yet!"
