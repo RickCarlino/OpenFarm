@@ -22,6 +22,7 @@ class Icon
   validates_presence_of :user
 
   after_save :reindex_icons
+    has_and_belongs_to_many :crops
 
   def reindex_icons
     ReindexIconsJob.perform_later

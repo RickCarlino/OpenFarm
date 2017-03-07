@@ -14,6 +14,7 @@ class Crop
   field :impressions_field, default: 0, type: Integer
 
   has_many :guides
+  has_and_belongs_to_many :icon
   field :guides_count, type: Fixnum, default: 0
 
   field :description
