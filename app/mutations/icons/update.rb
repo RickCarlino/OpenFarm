@@ -1,5 +1,6 @@
 module Icons
   class Update < Mutations::Command
+    AUTH_ERROR = 'You can\'t create garden crops for gardens you don\'t own.'
 
     required do
       model :icon
