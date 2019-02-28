@@ -16,7 +16,7 @@ gem "mongoid-paperclip", require: "mongoid_paperclip"
 
 gem "active_model_serializers"
 gem "aws-sdk-rails"
-gem "aws-sdk"
+gem "aws-sdk-s3"
 gem "bson_ext"
 
 gem "searchkick"

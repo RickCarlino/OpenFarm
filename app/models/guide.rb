@@ -28,7 +28,7 @@ class Guide
   #   `dependent: :delete_all`.
   #   If we don't, tests will fail with the following error:
   #   NameError uninitialized constant Mongoid::Relations::Cascading::DeleteAll
-  has_many :impressions, as: :impressionable, dependent: :delete
+  # has_many :impressions, as: :impressionable, dependent: :destroy
 
   # NOTE TO FUTURE SELF: Try removing the line above and see if tests pass.
   #   that would indicate that the bug was fixed upstream and we can remove this
