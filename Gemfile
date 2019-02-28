@@ -77,7 +77,6 @@ group :development, :test do
   gem "faker"
   gem "binding_of_caller"
   gem "rails-controller-testing" # For 'assert_template'
-  gem "puma" # For capybara
 end
 
 group :test do

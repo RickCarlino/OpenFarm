@@ -35,6 +35,7 @@ Capybara.default_max_wait_time = 10
 Capybara.register_driver :apparition do |app|
   Capybara::Apparition::Driver.new(app, headless: true) # debug mode: false
 end
+Capybara.server = :webrick
 # =====
 Delayed::Worker.delay_jobs = false
 # ===== VCR stuff (records HTTP requests for playback)
