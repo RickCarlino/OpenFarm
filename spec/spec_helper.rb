@@ -1,7 +1,3 @@
-4.times do |n|
-  # Unfortunate racecondition in Elasticsearch
-  puts "#{n}/10 seconds remaining"
-end
 
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= "test"
@@ -35,9 +31,32 @@ require "webmock/rspec"
 require "pundit/rspec"
 
 # ====== PHANTOMJS stuff
-Capybara.javascript_driver = :selenium_headless
-Capybara.default_max_wait_time = 10
+begin
+  open("http://search:9200") # Funny hack
+rescue Errno::ECONNREFUSED => x
+  sleep 0.3
+  puts "Wiating for ElasticSearch to start..."
+end
+
+# ?===
+Capybara.javascript_driver = :selenium
+Capybara.app_host = "http://web"
+Capybara.server_port = 3000
+Capybara.run_server = true
+# I don't think Puma's speed is worth adding a
+# new test dependency.
 Capybara.server = :webrick
+
+# Configure the Chrome driver capabilities & register
+args = ["--no-default-browser-check", "--start-maximized"]
+caps = Selenium::WebDriver::Remote::Capabilities.firefox
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app,
+                                 browser: :remote,
+                                 url: "http://hub:4444/wd/hub",
+                                 desired_capabilities: caps)
+end
+# ?===
 
 Delayed::Worker.delay_jobs = false
 # ===== VCR stuff (records HTTP requests for playback)
@@ -50,7 +69,10 @@ VCR.configure do |c|
   }
   c.ignore_localhost = true
   c.ignore_request do |request|
-    URI(request.uri).port == 9200
+    [
+      9200, # Elastic search
+      4444, # Selenium hub
+    ].include? URI(request.uri).port
   end
 end
 # =====

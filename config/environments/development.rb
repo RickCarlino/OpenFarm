@@ -15,8 +15,7 @@ OpenFarm::Application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
   config.after_initialize do
-    puts "=== Waiting 6 seconds, then reindexing searchkick..."
-    sleep 6
+    open("http://search:9200") # Funny hack
     Crop.reindex
     Guide.reindex
   end

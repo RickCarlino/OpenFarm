@@ -15,10 +15,16 @@ services:
       - .:/openfarm
       - ./docker_volumes/bundle_cache:/bundle
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -e development -p 3000 -b 0.0.0.0"
-    depends_on: ["mongo", "search"]
+    depends_on: ["mongo", "search", "hub"]
     env_file:   .env
     image:      openfarm
     ports:      ["3000:3000"] # Web / API
     stdin_open: true          # Needed for binding.pry
     tty:        true          # Needed for binding.pry
-
+  # Special thanks to Colin Dao:
+  # https://colindao.wordpress.com/2018/
+  #   06/07/docker-capybara-selenium-chrome-driver/
+  hub:
+    image: selenium/hub:3.141.59-lithium
+    ports:
+      - "4444:4444"
