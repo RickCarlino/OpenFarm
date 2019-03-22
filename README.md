@@ -54,14 +54,6 @@ On the way we work together, we aim at:
 - prefering done, than perfect: breaking down tasks so that anyone can contribute few min of their time on a regular basis
 - taking shortcuts: what's the most obvious for a better usability? what's the shortest way to build a feature? What's the most valuable inputs for a feedback?
 
-### User Flow
-
-Update in progress
-
-### Mockups
-
-Update in progress
-
 ## Development
 
 ### Getting Started (The Easy Way)

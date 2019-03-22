@@ -1,3 +1,8 @@
+4.times do |n|
+  # Unfortunate racecondition in Elasticsearch
+  puts "#{n}/10 seconds remaining"
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= "test"
 
@@ -28,26 +33,25 @@ require "webmock/rspec"
 require "vcr"
 require "webmock/rspec"
 require "pundit/rspec"
+
 # ====== PHANTOMJS stuff
 Capybara.javascript_driver = :selenium_headless
 Capybara.default_max_wait_time = 10
-Capybara.register_driver :apparition do |app|
-  Capybara::Apparition::Driver.new(app, headless: true) # debug mode: false
-end
 Capybara.server = :webrick
-# =====
+
 Delayed::Worker.delay_jobs = false
 # ===== VCR stuff (records HTTP requests for playback)
 VCR.configure do |c|
   c.cassette_library_dir = "vcr"
   c.hook_into :webmock # or :fakeweb
-  c.default_cassette_options = { record: :new_episodes,
-                                match_requests_on: [:host, :method] }
+  c.default_cassette_options = {
+    record: :new_episodes,
+    match_requests_on: [:host, :method],
+  }
   c.ignore_localhost = true
   c.ignore_request do |request|
     URI(request.uri).port == 9200
   end
-  # c.allow_http_connections_when_no_cassette = true
 end
 # =====
 
