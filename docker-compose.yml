@@ -15,7 +15,7 @@ services:
       - .:/openfarm
       - ./docker_volumes/bundle_cache:/bundle
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -e development -p 3000 -b 0.0.0.0"
-    depends_on: ["mongo", "search", "hub"]
+    depends_on: ["mongo", "search"]
     env_file:   .env
     image:      openfarm
     ports:      ["3000:3000"] # Web / API
@@ -24,7 +24,37 @@ services:
   # Special thanks to Colin Dao:
   # https://colindao.wordpress.com/2018/
   #   06/07/docker-capybara-selenium-chrome-driver/
+  tests:
+    build:
+      context: .
+    volumes:
+      - .:/openfarm
+      - ./docker_volumes/bundle_cache:/bundle
+    command: bundle exec rspec spec
+    depends_on: ["mongo", "search", "hub", "firefox", "chrome"]
+    env_file:   .env
+    image:      openfarm
+    ports:      ["3000:3000"] # Web / API
+    stdin_open: true          # Needed for binding.pry
+    tty:        true          # Needed for binding.pry
   hub:
-    image: selenium/hub:3.141.59-lithium
+    image: selenium/hub:3.141.59-mercury
+    container_name: hub
     ports:
       - "4444:4444"
+  chrome:
+    image: selenium/node-chrome:3.141.59-mercury
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on: ["hub"]
+    environment:
+      - HUB_HOST=hub
+      - HUB_PORT=4444
+  firefox:
+    image: selenium/node-firefox:3.141.59-mercury
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on: ["hub"]
+    environment:
+      - HUB_HOST=hub
+      - HUB_PORT=4444

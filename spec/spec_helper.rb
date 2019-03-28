@@ -32,7 +32,7 @@ require "pundit/rspec"
 
 # ====== PHANTOMJS stuff
 begin
-  open("http://search:9200") # Funny hack
+  open(ENV.fetch("ELASTICSEARCH_URL")) # Funny hack
 rescue Errno::ECONNREFUSED => x
   sleep 0.3
   puts "Wiating for ElasticSearch to start..."
