@@ -31,7 +31,7 @@ services:
       - .:/openfarm
       - ./docker_volumes/bundle_cache:/bundle
     command: bundle exec rspec spec
-    depends_on: ["mongo", "search", "hub", "firefox", "chrome"]
+    depends_on: ["web", "hub", "firefox", "chrome"]
     env_file:   .env
     image:      openfarm
     ports:      ["3000:3000"] # Web / API

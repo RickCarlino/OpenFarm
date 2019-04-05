@@ -1,4 +1,3 @@
-
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 ENV["RAILS_ENV"] ||= "test"
 
@@ -31,17 +30,10 @@ require "webmock/rspec"
 require "pundit/rspec"
 
 # ====== PHANTOMJS stuff
-begin
-  open(ENV.fetch("ELASTICSEARCH_URL")) # Funny hack
-rescue Errno::ECONNREFUSED => x
-  sleep 0.3
-  puts "Wiating for ElasticSearch to start..."
-end
-
 # ?===
 Capybara.javascript_driver = :selenium
-Capybara.app_host = "http://web"
-Capybara.server_port = 3000
+Capybara.app_host = "http://web:3000"
+# Capybara.server_port = 3000
 Capybara.run_server = true
 # I don't think Puma's speed is worth adding a
 # new test dependency.
