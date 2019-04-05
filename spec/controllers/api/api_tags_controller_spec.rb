@@ -8,7 +8,6 @@ describe Api::V1::TagsController, type: :controller do
     Crop.collection.drop
     FactoryBot.create(:crop, name: 'mung bean', tags: 'tagOne')
     FactoryBot.create(:crop, tags: 'tagTwo')
-    Crop.searchkick_index.refresh
   end
 
   it 'lists tags' do

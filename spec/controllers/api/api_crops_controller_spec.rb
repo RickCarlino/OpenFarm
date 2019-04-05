@@ -9,7 +9,6 @@ describe Api::V1::CropsController, type: :controller do
     FactoryBot.create(:crop, name: "other bean")
     @beans = FactoryBot.create(:crop, name: "mung bean")
     FactoryBot.create_list(:crop, 2)
-    Crop.searchkick_index.refresh
   end
 
   it "lists crops." do

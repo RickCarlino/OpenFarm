@@ -33,7 +33,7 @@ describe "User features", type: :feature do
         visit user_path(:en, user.id)
         meta = find("meta[property='og:image']", visible: false)
         expect(meta).to be
-        expect(meta[:content]).to include("#{host_with_port}#{favorite_crop_path}")
+        expect(meta[:content]).to include(favorite_crop_path)
       end
     end
 

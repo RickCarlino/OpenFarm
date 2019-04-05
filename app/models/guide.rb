@@ -6,15 +6,6 @@ class Guide
 
   attr_accessor :current_user_compatibility_score
 
-  searchkick(callbacks: :async)
-
-  # The below seems to have made no difference, but it's based on:
-  # https://github.com/ankane/searchkick#stay-synced
-  # and the recommendations here:
-  # https://github.com/ankane/searchkick/issues/373#issuecomment-71967887
-  # Though it can probably be tweaked further.
-  scope :search_import, -> { includes(:user) }
-
   # BEGIN SURPRISING IMPRESSIONIST WORKAROUND (RickCarlino, 28 FEB 19) =========
   #   The work that follows is based off of:
   #   https://github.com/charlotte-ruby/impressionist/pull/258

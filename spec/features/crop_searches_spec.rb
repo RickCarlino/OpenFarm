@@ -16,7 +16,6 @@ describe "Crop search", type: :controller do
   #   visit root_path
   #   FactoryBot.create_list(:crop, 10)
   #   FactoryBot.create(:crop, name: 'radish')
-  #   Crop.searchkick_index.refresh
   #   fill_in 'q', with: 'radish'
   #   click_button 'Search'
   #   expect(page).to have_content('radish')
@@ -29,7 +28,6 @@ describe "Crop search", type: :controller do
     visit root_path
     fill_in "q", with: ""
     FactoryBot.create_list(:crop, 10)
-    Crop.reindex
     click_button "Search"
     expect(page).to have_content(Crop.last.name)
     # Don't use crops with apostraphes in the name- creates weird errors.
@@ -49,7 +47,6 @@ describe "Crop search", type: :controller do
   it "handles empty search results", js: true do
     Crop.collection.drop
     FactoryBot.create_list(:crop, 10)
-    Crop.searchkick_index.refresh
     visit root_path
     fill_in "q", with: "pokemon"
     click_button "Search"
@@ -70,7 +67,6 @@ describe "Crop search", type: :controller do
     Crop.collection.drop
     FactoryBot.create_list(:crop, 10)
     q = FactoryBot.create(:crop, :radish).name
-    Crop.searchkick_index.refresh
     visit root_path
     fill_in "q", with: q
     click_button "Search"
@@ -82,7 +78,6 @@ describe "Crop search", type: :controller do
   #   visit root_path
   #   FactoryBot.create_list(:crop, 10)
   #   FactoryBot.create(:crop, name: 'radish')
-  #   Crop.searchkick_index.refresh
   #   fill_in 'q', with: 'radis'
   #   click_button 'Search'
   #   expect(page).to have_content('radish')
@@ -94,7 +89,6 @@ describe "Crop search", type: :controller do
   #   visit root_path
   #   FactoryBot.create_list(:crop, 10)
   #   FactoryBot.create(:crop, name: 'radish')
-  #   Crop.searchkick_index.refresh
   #   fill_in 'q', with: 'pear radish'
   #   click_button 'Search'
   #   expect(page).to have_content('radish')
@@ -107,7 +101,6 @@ describe "Crop search", type: :controller do
   #   visit crop_search_via_get_path(cropsearch: { q: 'red' })
   #   fill_in 'q', with: crop.name
   #   FactoryBot.create_list(:crop, 10)
-  #   Crop.searchkick_index.refresh
   #   click_button 'Search'
   #   expect(page).to have_content(crop.name)
   # end

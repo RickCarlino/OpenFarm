@@ -6,9 +6,6 @@ describe CropSearchesController, type: "controller" do
     guide = FactoryBot.create(:guide, crop: crop, draft: false)
     other_guide = FactoryBot.create(:guide)
 
-    Crop.reindex
-    Guide.reindex
-
     Legacy._get self, "search", q: "carrot"
 
     expect(assigns[:guides].results).to include(guide)
@@ -19,9 +16,6 @@ describe CropSearchesController, type: "controller" do
     crop = FactoryBot.create(:crop, name: "Carrot")
     guide = FactoryBot.create(:guide, crop: crop, draft: true)
     other_guide = FactoryBot.create(:guide)
-
-    Crop.reindex
-    Guide.reindex
 
     Legacy._get self, "search", q: "carrot"
 
@@ -51,10 +45,6 @@ describe CropSearchesController, type: "controller" do
                  environment: ["Outside"],
                  soil: ["Loam"],
                  light: ["Full Sun"])
-
-    Crop.reindex
-    Guide.searchkick_index.refresh
-    Guide.reindex
 
     sign_in user
     Legacy._get self, "search", q: "carrot"

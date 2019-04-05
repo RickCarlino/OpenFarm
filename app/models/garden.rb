@@ -5,8 +5,6 @@ class Garden
   belongs_to :user
   validates_presence_of :user
 
-  after_save :reindex_guides
-
   embeds_many :garden_crops
   accepts_nested_attributes_for :garden_crops
 
@@ -25,10 +23,4 @@ class Garden
   embeds_many :pictures, cascade_callbacks: true, as: :photographic
   accepts_nested_attributes_for :pictures
   scope :is_public, -> { where(is_private: true) }
-
-  protected
-
-  def reindex_guides
-    ReindexGuidesJob.perform_later
-  end
 end

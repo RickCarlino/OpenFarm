@@ -62,7 +62,7 @@ VCR.configure do |c|
   c.ignore_localhost = true
   c.ignore_request do |request|
     [
-      9200, # Elastic search
+      # 9200, # Elastic search
       4444, # Selenium hub
     ].include? URI(request.uri).port
   end
@@ -74,8 +74,6 @@ Paperclip.options[:log] = false
 require "database_cleaner"
 Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 Mongoid.logger.level = 2
-Guide.reindex
-Crop.reindex
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.include Rails.application.routes.url_helpers

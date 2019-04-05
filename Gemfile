@@ -22,7 +22,6 @@ gem "aws-sdk-rails"
 gem "aws-sdk-s3"
 gem "bson_ext"
 
-gem "searchkick"
 # This gem requires a manual upgrade.
 # Help appreciated -RC 15 MAR 19
 gem "gibbon", "~> 1"

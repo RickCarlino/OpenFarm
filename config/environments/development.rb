@@ -14,11 +14,6 @@ OpenFarm::Application.configure do
   config.quiet_assets = true
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_url_options = { :host => "localhost:3000" }
-  config.after_initialize do
-    open("http://search:9200") # Funny hack
-    Crop.reindex
-    Guide.reindex
-  end
 
   # options = { storage: :s3,
   #             s3_protocol: :https,

@@ -15,20 +15,17 @@ describe Crop do
 
     it 'searches by name' do
       skip 'this test does not pass on CI - RickCarlino'
-      Crop.searchkick_index.refresh
       results = Crop.search('Common Horseradish').to_a
       expect(results).to include(crop)
     end
 
     it 'searches by binomial name' do
       skip 'this test does not pass on CI - RickCarlino'
-      Crop.searchkick_index.refresh
       expect(Crop.search('Armoracia rusticana').to_a).to include(crop)
     end
 
     it 'searches by description' do
       skip 'this test does not pass on CI - RickCarlino'
-      Crop.searchkick_index.refresh
       expect(Crop.search('Brassicaceae family').to_a).to include(crop)
     end
 

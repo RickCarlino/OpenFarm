@@ -45,7 +45,6 @@ describe Api::V1::GuidesController, type: :controller do
       skip "Fails on CI: skipping - RickCarlino"
       sign_in FactoryBot.create(:user)
       crop = FactoryBot.create(:crop, name: "Terra Plant")
-      Crop.reindex
       original_length = Crop.all.length
       data = { attributes: { name: "brocolini in the desert",
                             overview: "something exotic" },

@@ -21,13 +21,4 @@ describe GardenCrop do
     garden_crop.update_attributes(stage: "I'm a new stage")
     expect(garden_crop.history_tracks.count).to eq(number)
   end
-
-  it "reindexes guides" do
-    Guide.collection.drop
-    FactoryBot.create(:guide)
-
-    expect_any_instance_of(Guide).to receive(:reindex)
-
-    FactoryBot.create(:user)
-  end
 end

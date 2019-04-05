@@ -7,7 +7,6 @@
 # # Trusted Bucket (Paperclip) Policy Here:
 # ENV['SERVER_S3_ACCESS_KEY']  = '123'
 # ENV['SERVER_S3_SECRET_KEY']  = '456'
-# ENV['ELASTICSEARCH_URL'] = 'http://127.0.0.1:9200'
 
 # # Emails seperated by pipes('|')
 # ENV['ALERTS']                = "t@g.com|a@b.com"
