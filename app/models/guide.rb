@@ -64,7 +64,7 @@ class Guide
 
   accepts_nested_attributes_for :time_span
 
-  search_in :name, :overview
+  search_in :name, :overview, crop: :name
 
 def self.sorted_for_user(guides, user)
     # PRODUCTION IS DOWN RIGHT NOW.

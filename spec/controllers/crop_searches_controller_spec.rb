@@ -7,9 +7,10 @@ describe CropSearchesController, type: "controller" do
     other_guide = FactoryBot.create(:guide)
 
     Legacy._get self, "search", q: "carrot"
+    guides = assigns[:guides]
 
-    expect(assigns[:guides].results).to include(guide)
-    expect(assigns[:guides].results).to_not include(other_guide)
+    expect(guides.results).to include(guide)
+    expect(guides.results).to_not include(other_guide)
   end
 
   it "should not find draft guides" do
@@ -18,9 +19,10 @@ describe CropSearchesController, type: "controller" do
     other_guide = FactoryBot.create(:guide)
 
     Legacy._get self, "search", q: "carrot"
+    guides = assigns[:guides]
 
-    expect(assigns[:guides].results).to_not include(guide)
-    expect(assigns[:guides].results).to_not include(other_guide)
+    expect(guides.results).to_not include(guide)
+    expect(guides.results).to_not include(other_guide)
   end
 
   it "should order guides by compatibility" do

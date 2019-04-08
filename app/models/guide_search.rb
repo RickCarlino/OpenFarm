@@ -10,7 +10,7 @@ class GuideSearch
   end
 
   def search(query = ALL)
-    @query = query
+    query = query
     self
   end
 
@@ -25,9 +25,10 @@ class GuideSearch
   end
 
   def for_crops(crops)
-    filter[:crop_id] = Array(crops).map do |crop|
-      crop.respond_to?(:id) ? crop.id : crop
-    end
+    filter[:crop_id] = []
+    # filter[:crop_id] = Array(crops).map do |crop|
+    #   crop.respond_to?(:id) ? crop.id : crop
+    # end
 
     self
   end
@@ -49,9 +50,10 @@ class GuideSearch
 
   # Methods for Enumeration.
   def results
-    (empty_search? ? Guide.all : Guide.search(query))
-      .where(filter)
+    Guide
       .order(order)
+      .where(filter)
+      .full_text_search(query)
   end
 
   def method_missing(meth, *args, &block)
@@ -67,6 +69,10 @@ class GuideSearch
   end
 
   private
+
+  def query=(q)
+    @query = (q || ALL).downcase
+  end
 
   def empty_search?
     query == ALL

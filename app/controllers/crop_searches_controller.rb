@@ -4,15 +4,9 @@ class CropSearchesController < ApplicationController
   def search
     query = params[:q].to_s.encode("utf-8", "iso-8859-1")
 
-    @crops = Crop.search(query,
-                         limit: 25,
-                         operator: "or", # partial: true,
-                         misspellings: { distance: 2 },
-                         fields: ["name^20",
-                                  "common_names^10",
-                                  "binomial_name^10",
-                                  "description"],
-                         boost_by: [:guides_count])
+    @crops = Crop
+      .full_text_search(query)
+      .limit(25)
     if query.blank?
       @crops = Crop.search("*", limit: 25, boost_by: [:guides_count])
     end
