@@ -111,6 +111,7 @@ RSpec.configure do |config|
   config.after do
     DatabaseCleaner.clean
   end
+  config.filter_run_excluding js: true
 end
 
 class ActionController::TestCase

@@ -5,6 +5,7 @@ class Crop
   include Mongoid::Timestamps
   include Mongoid::Slug
   include Mongoid::Taggable
+  include Mongoid::Search
 
   is_impressionable counter_cache: true,
                     column_name: :impressions_field,
@@ -58,6 +59,8 @@ class Crop
   slug :name
 
   after_save :backlink_companion_crops
+
+  search_in :name, :common_names, :binomial_name, :description
 
   def search_data
     as_json only: [:name, :common_names, :binomial_name, :description,

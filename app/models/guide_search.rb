@@ -1,22 +1,21 @@
 class GuideSearch
-  attr_reader :filter
-  attr_reader :order
-  attr_reader :query
+  ALL = "*"
+
+  attr_reader :filter, :order, :query
 
   def initialize
     @filter = {}
     @order = { _score: :desc }
-    @query = '*'
-
+    @query = ALL
   end
 
-  def self.search(query = '*')
-    new.search(query)
-  end
-
-  def search(query = '*')
+  def search(query = ALL)
     @query = query
     self
+  end
+
+  def self.search(query = ALL)
+    new.search(query)
   end
 
   def ignore_drafts()
@@ -50,8 +49,9 @@ class GuideSearch
 
   # Methods for Enumeration.
   def results
-    results = Guide.search(query, where: filter, order: order)
-    results
+    (empty_search? ? Guide.all : Guide.search(query))
+      .where(filter)
+      .order(order)
   end
 
   def method_missing(meth, *args, &block)
@@ -64,5 +64,11 @@ class GuideSearch
 
   def respond_to?(meth)
     results.respond_to?(meth)
+  end
+
+  private
+
+  def empty_search?
+    query == ALL
   end
 end

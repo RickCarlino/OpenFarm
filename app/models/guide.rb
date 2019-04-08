@@ -1,10 +1,11 @@
 class Guide
+  attr_accessor :current_user_compatibility_score
+
   include Mongoid::Document
   include Mongoid::Paperclip
   include Mongoid::Slug
   include Mongoid::Timestamps
-
-  attr_accessor :current_user_compatibility_score
+  include Mongoid::Search
 
   # BEGIN SURPRISING IMPRESSIONIST WORKAROUND (RickCarlino, 28 FEB 19) =========
   #   The work that follows is based off of:
@@ -63,7 +64,9 @@ class Guide
 
   accepts_nested_attributes_for :time_span
 
-  def self.sorted_for_user(guides, user)
+  search_in :name, :overview
+
+def self.sorted_for_user(guides, user)
     # PRODUCTION IS DOWN RIGHT NOW.
     # I am going to plug this runtime error until
     # we figure out what went wrong during the

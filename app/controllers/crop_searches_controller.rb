@@ -17,9 +17,9 @@ class CropSearchesController < ApplicationController
       @crops = Crop.search("*", limit: 25, boost_by: [:guides_count])
     end
 
-    @guides = GuideSearch.search("*").ignore_drafts.for_crops(@crops).with_user(current_user)
+    search = GuideSearch.search("*").ignore_drafts.for_crops(@crops).with_user(current_user)
 
-    @guides = Guide.sorted_for_user(@guides, current_user)
+    @guides = Guide.sorted_for_user(search, current_user)
 
     render :show
   end

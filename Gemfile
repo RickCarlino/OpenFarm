@@ -41,6 +41,7 @@ gem "coffee-rails"
 gem "utf8-cleaner"
 gem "platform-api"
 gem "rack-cors", require: "rack/cors"
+gem "mongoid_search"
 
 # Asset management using bower
 # https://rails-assets.org/

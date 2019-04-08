@@ -176,6 +176,7 @@ GEM
       i18n (>= 0.7)
     faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
+    fast-stemmer (1.0.2)
     ffi (1.10.0)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
@@ -277,6 +278,9 @@ GEM
       mongoid (>= 3.0)
       mongoid-compatibility
       stringex (~> 2.0)
+    mongoid_search (0.3.6)
+      fast-stemmer (~> 1.0.0)
+      mongoid (>= 3.0.0)
     mongoid_taggable (1.1.1)
       mongoid (>= 3)
       rake
@@ -529,6 +533,7 @@ DEPENDENCIES
   mongoid-history
   mongoid-paperclip
   mongoid-slug
+  mongoid_search
   mongoid_taggable
   mutations
   ng-rails-csrf
